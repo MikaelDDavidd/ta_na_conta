@@ -1,4 +1,4 @@
-// Classe abstrata base para exceções da aplicação
+
 abstract class AppException implements Exception {
   final String message;
   const AppException([this.message = '']);
@@ -6,6 +6,9 @@ abstract class AppException implements Exception {
   @override
   String toString() => message.isEmpty ? 'AppException' : 'AppException: $message';
 }
+
+
+
 
 class InvalidParameterException extends AppException {
   const InvalidParameterException([String message = 'Parâmetro inválido']) : super(message);
@@ -25,7 +28,7 @@ class ApiException extends AppException {
   String toString() => 'ApiException (status: $statusCode): $message';
 }
 
-// Exceção para métodos não implementados
+
 class NotImplementedException extends AppException {
   const NotImplementedException([String message = 'Método não implementado']) : super(message);
 }

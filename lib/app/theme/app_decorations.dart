@@ -22,12 +22,17 @@ class AppDecorations {
   );
 
   static BoxDecoration qrBorder = BoxDecoration(
-    color: Colors
-        .transparent, // Fundo branco para criar um espaçamento entre o QR e a borda
-    borderRadius: BorderRadius.circular(12), // Bordas arredondadas opcionais
+    color: Colors.transparent,
+    borderRadius: BorderRadius.circular(12),
     border: Border.all(
-      color: AppColors.tertiary, // Cor da borda
-      width: 3, // Espessura da borda
+      color: AppColors.tertiary,
+      width: 3,
     ),
+  );
+
+  // New decoration for sale list items in HomeView.
+  static BoxDecoration saleItemBox = BoxDecoration(
+    color: AppColors.primary,
+    borderRadius: BorderRadius.circular(10),
   );
 }

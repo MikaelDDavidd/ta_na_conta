@@ -40,25 +40,28 @@ class LoginView extends GetView<LoginController> {
               ),
               const SizedBox(height: 30),
               // Formulário com efeito Shake customizado
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: Column(
-                  children: [
-                    ShakeableLoginForm(
-                      key: shakeFormKey,
-                      emailController: controller.emailController,
-                      passwordController: controller.passwordController,
-                    ),
-                    Obx(() => controller.errorMessage.value.isNotEmpty
-                        ? Padding(
-                            padding: const EdgeInsets.only(top: 10),
-                            child: Text(
-                              controller.errorMessage.value,
-                              style: const TextStyle(color: Colors.red),
-                            ),
-                          )
-                        : const SizedBox.shrink()),
-                  ],
+              FadeInUp(
+                duration: const Duration(milliseconds: 950),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: Column(
+                    children: [
+                      ShakeableLoginForm(
+                        key: shakeFormKey,
+                        emailController: controller.emailController,
+                        passwordController: controller.passwordController,
+                      ),
+                      Obx(() => controller.errorMessage.value.isNotEmpty
+                          ? Padding(
+                              padding: const EdgeInsets.only(top: 10),
+                              child: Text(
+                                controller.errorMessage.value,
+                                style: const TextStyle(color: Colors.red),
+                              ),
+                            )
+                          : const SizedBox.shrink()),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 30),
@@ -72,6 +75,7 @@ class LoginView extends GetView<LoginController> {
                         onPressed: () async {
                           controller.isLoading.value = true;
                           if (!(await controller.validateCredentials())) {
+                            controller.makeItShakeable();
                             shakeFormKey.currentState?.triggerShake();
                           } else {
                             Get.to(() => const PaymentsView());
@@ -79,7 +83,7 @@ class LoginView extends GetView<LoginController> {
                           controller.isLoading.value = false;
                         },
                         isLoading: controller
-                            .isLoading.value, // Passa o estado de carregamento
+                            .isLoading.value,
                       )),
                 ),
               ),

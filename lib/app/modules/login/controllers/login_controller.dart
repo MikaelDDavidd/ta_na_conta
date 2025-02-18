@@ -4,6 +4,7 @@ import 'package:ta_na_conta/app/exceptions/app_exceptions.dart';
 import 'package:ta_na_conta/app/services/connectivity_service.dart';
 
 class LoginController extends GetxController {
+  var shakeable = 1.0.obs;
   var isLoading = false.obs;
   var isPasswordVisible = false.obs;
   final emailController = TextEditingController();
@@ -12,13 +13,11 @@ class LoginController extends GetxController {
   static const String fakePassword = "123456";
   var errorMessage = ''.obs;
 
-  /// Valida o formato do e-mail
   bool isValidEmail(String email) {
     final regex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
     return regex.hasMatch(email);
   }
 
-  /// Verifica conexão com a internet antes do login
   Future<bool> checkConnectivity() async {
     final connectivityService = Get.find<ConnectivityService>();
     try {
@@ -33,21 +32,18 @@ class LoginController extends GetxController {
     }
   }
 
-  /// Valida credenciais e internet antes de permitir login
   Future<bool> validateCredentials() async {
-    isLoading.value = true; // Ativa loading
+    isLoading.value = true;
 
     final email = emailController.text.trim();
     final password = passwordController.text;
 
-    // Valida formato do e-mail
     if (!isValidEmail(email)) {
       errorMessage.value = "Formato de e-mail inválido.";
       isLoading.value = false;
       return false;
     }
 
-    // Valida usuário e senha fake (simulação)
     if (email.toLowerCase() != fakeEmail) {
       errorMessage.value = "E-mail incorreto.";
       isLoading.value = false;
@@ -59,16 +55,28 @@ class LoginController extends GetxController {
       return false;
     }
 
-    // Verifica conexão antes do login
     if (!await checkConnectivity()) {
       isLoading.value = false;
       return false;
     }
 
-    // Reseta erros e retorna sucesso
     errorMessage.value = "";
     isLoading.value = false;
     return true;
+  }
+
+  void makeItShakeable() {
+    shakeable.value = 0.0;
+  }
+
+  void makeItUnShakeable() {
+    shakeable.value = 1.0;
+  }
+
+  @override
+  void onInit() {
+    makeItUnShakeable();
+    super.onInit();
   }
 
   @override

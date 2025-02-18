@@ -6,7 +6,6 @@ import 'package:ta_na_conta/app/theme/app_text_styles.dart';
 import 'package:ta_na_conta/app/modules/login/controllers/login_controller.dart';
 import 'shake_widget.dart';
 
-/// Widget stateful que envolve o formulário e permite disparar a animação de shake.
 class ShakeableLoginForm extends StatefulWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
@@ -22,7 +21,7 @@ class ShakeableLoginForm extends StatefulWidget {
 }
 
 class ShakeableLoginFormState extends State<ShakeableLoginForm> {
-  Key shakeKey = UniqueKey();
+  Key shakeKey = GlobalKey();
 
   void triggerShake() {
     setState(() {
