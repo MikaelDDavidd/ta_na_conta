@@ -8,44 +8,67 @@ enum PaymentStatus {
 
 /// Model class representing a Payment.
 class Payment {
-  final double value;
-  final DateTime createdAt;
-  final String payerName;
-  final String payerDocument;
-  final PaymentStatus status;
+  final PaymentStatus status;   // Enum de status (pending, approved, etc.)
+  final double amount;          // Valor da transação
+  final DateTime date;          // Data da transação
+  final String recipientCPF;    // CPF do destinatário
+  final String recipientName;   // Nome do destinatário
+  final String recipientInst;   // Instituição do destinatário
+  final String? payerCPF;       // CPF do pagador (opcional)
+  final String? payerName;      // Nome do pagador (opcional)
+  final String? payerInst;      // Instituição do pagador (opcional)
 
-  const Payment({
-    required this.value,
-    required this.createdAt,
-    required this.payerName,
-    required this.payerDocument,
+  Payment({
     required this.status,
+    required this.amount,
+    required this.date,
+    required this.recipientCPF,
+    required this.recipientName,
+    required this.recipientInst,
+    this.payerCPF,
+    this.payerName,
+    this.payerInst,
   });
 
-  /// Factory constructor to create a Payment object from JSON.
+  /// Factory constructor para criar um Payment a partir de JSON.
   factory Payment.fromJson(Map<String, dynamic> json) {
     return Payment(
-      value: json['value'] is int ? (json['value'] as int).toDouble() : json['value'] as double,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      payerName: json['payerName'] as String,
-      payerDocument: json['payerDocument'] as String,
-      status: _paymentStatusFromString(json['status'] as String),
+      status: _paymentStatusFromString(json['status']),
+      amount: json['amount'] is int
+          ? (json['amount'] as int).toDouble()
+          : json['amount'] as double,
+      date: DateTime.parse(json['date'] as String),
+
+      // Esses campos podem ser nulos no JSON (dependendo da resposta do servidor).
+      // Se tiver certeza de que não são nulos, pode remover o '?'
+      payerName: json['payerName'] as String?,
+      payerCPF: json['payerCPF'] as String?,
+      payerInst: json['payerInst'] as String?,
+
+      recipientName: json['recipientName'] as String,
+      recipientCPF: json['recipientCPF'] as String,
+      recipientInst: json['recipientInst'] as String,
     );
   }
 
-  /// Converts the Payment object to a JSON map.
+  /// Converte o objeto Payment para JSON.
   Map<String, dynamic> toJson() {
     return {
-      'value': value,
-      'createdAt': createdAt.toIso8601String(),
-      'payerName': payerName,
-      'payerDocument': payerDocument,
+      // Pegamos apenas a parte final do enum, por exemplo "approved", "pending", etc.
       'status': status.toString().split('.').last,
+      'amount': amount,
+      'date': date.toIso8601String(),
+      'payerName': payerName,
+      'payerCPF': payerCPF,
+      'payerInst': payerInst,
+      'recipientName': recipientName,
+      'recipientCPF': recipientCPF,
+      'recipientInst': recipientInst,
     };
   }
 }
 
-/// Helper function to parse a PaymentStatus from a string.
+/// Função auxiliar para converter string em PaymentStatus.
 PaymentStatus _paymentStatusFromString(String status) {
   switch (status.toLowerCase()) {
     case 'pending':

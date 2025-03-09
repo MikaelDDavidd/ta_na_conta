@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ta_na_conta/app/data/app_storage_keys.dart';
 import 'package:ta_na_conta/app/exceptions/app_exceptions.dart';
 import 'package:ta_na_conta/app/services/connectivity_service.dart';
 
 class LoginController extends GetxController {
+  RxBool keepLogin = false.obs;
   var shakeable = 1.0.obs;
   var isLoading = false.obs;
   var isPasswordVisible = false.obs;
@@ -41,6 +44,7 @@ class LoginController extends GetxController {
     if (!isValidEmail(email)) {
       errorMessage.value = "Formato de e-mail inválido.";
       isLoading.value = false;
+      Get.log(errorMessage.value);
       return false;
     }
 
@@ -71,6 +75,20 @@ class LoginController extends GetxController {
 
   void makeItUnShakeable() {
     shakeable.value = 1.0;
+  }
+
+  void makeLoginKeep() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    keepLogin.value = true;
+    await prefs.setBool(AppStorageKeys.keepLoginKey, true);
+    Get.log("Making LoginKeep True");
+  }
+
+  void makeLoginNoKeep() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    keepLogin.value = false;
+    await prefs.setBool(AppStorageKeys.keepLoginKey, false);
+    Get.log("Making LoginKeep False");
   }
 
   @override

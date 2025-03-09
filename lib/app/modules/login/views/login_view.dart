@@ -6,6 +6,7 @@ import 'package:ta_na_conta/app/data/app_strings.dart';
 import 'package:ta_na_conta/app/modules/login/controllers/login_controller.dart';
 import 'package:ta_na_conta/app/modules/login/widgets/shakeable_login_form.dart';
 import 'package:ta_na_conta/app/modules/payments/views/payments_view.dart';
+import 'package:ta_na_conta/app/routes/app_pages.dart';
 import 'package:ta_na_conta/app/theme/app_buttons.dart';
 import 'package:ta_na_conta/app/theme/app_colors.dart';
 
@@ -78,12 +79,12 @@ class LoginView extends GetView<LoginController> {
                             controller.makeItShakeable();
                             shakeFormKey.currentState?.triggerShake();
                           } else {
-                            Get.to(() => const PaymentsView());
+                            Get.toNamed(Routes.HOME);
+                            controller.makeLoginKeep();
                           }
                           controller.isLoading.value = false;
                         },
-                        isLoading: controller
-                            .isLoading.value,
+                        isLoading: controller.isLoading.value,
                       )),
                 ),
               ),

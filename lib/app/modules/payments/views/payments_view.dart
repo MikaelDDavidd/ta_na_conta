@@ -5,6 +5,8 @@ import 'package:ta_na_conta/app/modules/payments/views/qr_code_view.dart';
 import 'package:ta_na_conta/app/theme/app_buttons.dart';
 import 'package:ta_na_conta/app/theme/app_colors.dart';
 import 'package:ta_na_conta/app/theme/app_text_styles.dart';
+import 'package:time_picker_sheet/widget/sheet.dart';
+import 'package:time_picker_sheet/widget/time_picker.dart';
 
 class PaymentsView extends GetView<PaymentsController> {
   const PaymentsView({super.key});
@@ -16,6 +18,32 @@ class PaymentsView extends GetView<PaymentsController> {
       builder: (controller) {
         return Scaffold(
           backgroundColor: AppColors.background,
+          appBar: AppBar(actions: [
+            IconButton(
+              onPressed: () {
+                TimePicker.show(
+                  context: context,
+                  sheet: TimePickerSheet(
+                    sheetCloseIconColor: AppColors.tertiary,
+                    saveButtonColor: AppColors.tertiary,
+                    hourTitleStyle: AppTextStyles.wheelTitle,
+                    minuteTitleStyle: AppTextStyles.wheelTitle,
+                    sheetTitleStyle: AppTextStyles.title,
+                    wheelNumberItemStyle: AppTextStyles.wheelItem,
+                    wheelNumberSelectedStyle: AppTextStyles.wheelSelectedItem,
+                    sheetTitle: 'Tempo de validade',
+                    hourTitle: 'Hora',
+                    minuteTitle: 'Minuto',
+                    saveButtonText: 'Definir',
+                  ),
+                );
+              },
+              icon: Icon(
+                Icons.timer,
+                size: 30,
+              ),
+            ),
+          ]),
           body: SafeArea(
             child: Column(
               children: [
@@ -29,27 +57,14 @@ class PaymentsView extends GetView<PaymentsController> {
                             style: AppTextStyles.title.copyWith(fontSize: 40),
                           )),
                       const SizedBox(height: 10),
-
-                      // Dropdown para selecionar o tempo de expiração
-                      Obx(() => DropdownButton<String>(
-                            value: controller.expirationValue.value,
-                            dropdownColor: AppColors.primary,
-                            items: controller.expirationOptions
-                                .map((String option) {
-                              return DropdownMenuItem<String>(
-                                value: option,
-                                child: Text(
-                                  option,
-                                  style: AppTextStyles.hintText
-                                      .copyWith(fontSize: 16),
-                                ),
-                              );
-                            }).toList(),
-                            onChanged: (newValue) {
-                              controller.setExpiration(newValue);
-                            },
-                            underline: Container(),
-                          )),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [IconButton(
+                        onPressed: () {},
+                        icon: Icon(Icons.edit),
+                      ),Text("Descrição")],
+                      ),
+                      
                       const SizedBox(height: 40),
 
                       // Teclado Numérico
