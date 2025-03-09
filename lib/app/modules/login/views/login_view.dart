@@ -6,6 +6,7 @@ import 'package:ta_na_conta/app/data/app_strings.dart';
 import 'package:ta_na_conta/app/modules/login/controllers/login_controller.dart';
 import 'package:ta_na_conta/app/modules/login/widgets/shakeable_login_form.dart';
 import 'package:ta_na_conta/app/modules/payments/views/payments_view.dart';
+import 'package:ta_na_conta/app/routes/app_pages.dart';
 import 'package:ta_na_conta/app/theme/app_buttons.dart';
 import 'package:ta_na_conta/app/theme/app_colors.dart';
 
@@ -40,25 +41,28 @@ class LoginView extends GetView<LoginController> {
               ),
               const SizedBox(height: 30),
               // Formulário com efeito Shake customizado
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: Column(
-                  children: [
-                    ShakeableLoginForm(
-                      key: shakeFormKey,
-                      emailController: controller.emailController,
-                      passwordController: controller.passwordController,
-                    ),
-                    Obx(() => controller.errorMessage.value.isNotEmpty
-                        ? Padding(
-                            padding: const EdgeInsets.only(top: 10),
-                            child: Text(
-                              controller.errorMessage.value,
-                              style: const TextStyle(color: Colors.red),
-                            ),
-                          )
-                        : const SizedBox.shrink()),
-                  ],
+              FadeInUp(
+                duration: const Duration(milliseconds: 950),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: Column(
+                    children: [
+                      ShakeableLoginForm(
+                        key: shakeFormKey,
+                        emailController: controller.emailController,
+                        passwordController: controller.passwordController,
+                      ),
+                      Obx(() => controller.errorMessage.value.isNotEmpty
+                          ? Padding(
+                              padding: const EdgeInsets.only(top: 10),
+                              child: Text(
+                                controller.errorMessage.value,
+                                style: const TextStyle(color: Colors.red),
+                              ),
+                            )
+                          : const SizedBox.shrink()),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 30),
@@ -72,14 +76,15 @@ class LoginView extends GetView<LoginController> {
                         onPressed: () async {
                           controller.isLoading.value = true;
                           if (!(await controller.validateCredentials())) {
+                            controller.makeItShakeable();
                             shakeFormKey.currentState?.triggerShake();
                           } else {
-                            Get.to(() => const PaymentsView());
+                            Get.toNamed(Routes.HOME);
+                            controller.makeLoginKeep();
                           }
                           controller.isLoading.value = false;
                         },
-                        isLoading: controller
-                            .isLoading.value, // Passa o estado de carregamento
+                        isLoading: controller.isLoading.value,
                       )),
                 ),
               ),

@@ -44,6 +44,52 @@ class AppButtons {
       ),
     );
   }
+static Widget sellingButton({
+  required String text,
+  required VoidCallback onPressed,
+}) {
+  return GestureDetector(
+    onTap: onPressed,
+    child: Container(
+      height: 100,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: AppColors.tertiary,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Center(
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(
+              Icons.attach_money, // You can change this to any icon you prefer.
+              color: Colors.white,
+              size: 36,
+            ),
+            const SizedBox(width: 10),
+            Text(
+              text,
+              style: AppTextStyles.buttonText.copyWith(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
 
   static Widget loginButton({
     required String text,

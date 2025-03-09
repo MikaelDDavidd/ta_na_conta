@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ta_na_conta/app/data/app_storage_keys.dart';
 import 'package:ta_na_conta/app/exceptions/app_exceptions.dart';
 import 'package:ta_na_conta/app/services/connectivity_service.dart';
 
 class LoginController extends GetxController {
+  RxBool keepLogin = false.obs;
+  var shakeable = 1.0.obs;
   var isLoading = false.obs;
   var isPasswordVisible = false.obs;
   final emailController = TextEditingController();
@@ -12,13 +16,11 @@ class LoginController extends GetxController {
   static const String fakePassword = "123456";
   var errorMessage = ''.obs;
 
-  /// Valida o formato do e-mail
   bool isValidEmail(String email) {
     final regex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
     return regex.hasMatch(email);
   }
 
-  /// Verifica conexão com a internet antes do login
   Future<bool> checkConnectivity() async {
     final connectivityService = Get.find<ConnectivityService>();
     try {
@@ -33,21 +35,19 @@ class LoginController extends GetxController {
     }
   }
 
-  /// Valida credenciais e internet antes de permitir login
   Future<bool> validateCredentials() async {
-    isLoading.value = true; // Ativa loading
+    isLoading.value = true;
 
     final email = emailController.text.trim();
     final password = passwordController.text;
 
-    // Valida formato do e-mail
     if (!isValidEmail(email)) {
       errorMessage.value = "Formato de e-mail inválido.";
       isLoading.value = false;
+      Get.log(errorMessage.value);
       return false;
     }
 
-    // Valida usuário e senha fake (simulação)
     if (email.toLowerCase() != fakeEmail) {
       errorMessage.value = "E-mail incorreto.";
       isLoading.value = false;
@@ -59,16 +59,42 @@ class LoginController extends GetxController {
       return false;
     }
 
-    // Verifica conexão antes do login
     if (!await checkConnectivity()) {
       isLoading.value = false;
       return false;
     }
 
-    // Reseta erros e retorna sucesso
     errorMessage.value = "";
     isLoading.value = false;
     return true;
+  }
+
+  void makeItShakeable() {
+    shakeable.value = 0.0;
+  }
+
+  void makeItUnShakeable() {
+    shakeable.value = 1.0;
+  }
+
+  void makeLoginKeep() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    keepLogin.value = true;
+    await prefs.setBool(AppStorageKeys.keepLoginKey, true);
+    Get.log("Making LoginKeep True");
+  }
+
+  void makeLoginNoKeep() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    keepLogin.value = false;
+    await prefs.setBool(AppStorageKeys.keepLoginKey, false);
+    Get.log("Making LoginKeep False");
+  }
+
+  @override
+  void onInit() {
+    makeItUnShakeable();
+    super.onInit();
   }
 
   @override

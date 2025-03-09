@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ta_na_conta/app/modules/login/controllers/login_controller.dart';
 
 /// Widget customizado para efeito de shake.
 class ShakeWidget extends StatelessWidget {
@@ -21,14 +23,19 @@ class ShakeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TweenAnimationBuilder<double>(
-      tween: Tween(begin: 0.0, end: 1.0),
-      duration: duration,
-      builder: (context, animation, child) => Transform.translate(
-        offset: Offset(deltaX * shake(animation), 0),
+    final loginController = Get.find<LoginController>();
+    return Obx(() {
+      double value = loginController.shakeable.value;
+      return TweenAnimationBuilder<double>(
+        tween: Tween(begin: value, end: 1.0),
+        duration: duration,
+        builder: (context, animation, child) => Transform.translate(
+          offset: Offset(deltaX * shake(animation), 0),
+          child: child,
+        ),
         child: child,
-      ),
-      child: child,
-    );
+        onEnd: loginController.makeItUnShakeable,
+      );
+    });
   }
 }
