@@ -1,6 +1,6 @@
 # Tá na Conta
 
-O **Tá na Conta** é um sistema de vendas via Pix que utiliza QR Codes para facilitar transações. Desenvolvido em Flutter e utilizando o GetX para gerenciamento de estado, o aplicativo oferece uma experiência fluida e reativa, permitindo desde o login até a criação e monitoramento de transações via Pix.
+O **Tá na Conta** é um sistema de vendas via Pix que utiliza QR Codes para facilitar transações. Desenvolvido em Flutter com o GetX para gerenciamento de estado, o aplicativo oferece uma experiência fluida e reativa, abrangendo desde o login até a criação e monitoramento de transações via Pix.
 
 ---
 
@@ -9,50 +9,50 @@ O **Tá na Conta** é um sistema de vendas via Pix que utiliza QR Codes para fac
 O projeto possibilita que o usuário:
 - Realize login com segurança.
 - Acesse uma tela inicial que exibe o extrato de transações.
-- Crie QR Codes Pix através de uma interface intuitiva, que inclui:
+- Crie QR Codes Pix por meio de uma interface intuitiva, que conta com:
   - Teclado numérico para inserção do valor.
-  - Seleção de tempo de expiração.
-  - Campo para descrição da transação.
-- Visualize o QR Code gerado em uma tela dedicada, que exibe também:
+  - Seleção do tempo de expiração.
+  - Campo para adicionar uma descrição à transação.
+- Visualize o QR Code gerado em uma tela dedicada, que também apresenta:
   - Um timer de expiração.
-  - Botões para compartilhar e copiar o código (opção "copia e cola").
-- Receba notificações quando o pagamento é realizado dentro do prazo, atualizando o estado da transação.
+  - Botões para compartilhar o código, com opção de copiar para a área de transferência.
+- Receba notificações quando o pagamento é realizado dentro do prazo, atualizando automaticamente o estado da transação.
 
 ---
 
 ## Funcionalidades
 
-- **Autenticação:** Tela de login para acesso seguro.
-- **Extrato:** Tela inicial que apresenta o histórico de transações.
-- **Geração de QR Code Pix:** Criação de QR Code com personalização do valor, tempo de expiração e descrição.
-- **Monitoramento de Transações:** Notificações e atualização do status das transações conforme o pagamento é efetuado.
-- **Compartilhamento:** Opção de compartilhar o QR Code via cópia para a área de transferência.
+- **Autenticação:** Tela de login para acesso seguro ao sistema.
+- **Extrato de Transações:** Tela inicial com o histórico e status das operações realizadas.
+- **Geração de QR Code Pix:** Criação dinâmica de QR Code com personalização de valor, expiração e descrição.
+- **Notificações e Monitoramento:** Atualização do status da transação e notificação imediata sobre o pagamento.
+- **Compartilhamento:** Funcionalidade para compartilhar o QR Code, facilitando a divulgação dos dados de pagamento.
 
 ---
 
-## Tecnologias Utilizadas
+## Tecnologias e Dependências
 
-- **Flutter:** Framework principal para desenvolvimento mobile.
-- **GetX:** Gerenciamento de estado, injeção de dependências e navegação.
-- **Pacotes Adicionais:**
-  - `animate_do`
-  - `flutter_native_splash`
-  - `qr_flutter`
-  - `intl`
-  - `connectivity_plus`
-  - `flutter_shake_animated`
-  - `shared_preferences`
-  - `dotted_border`
-  - `sks_ticket_view`
-  - `pdf`
-  - `printing`
-  - `time_picker_sheet` (via Git)
+O projeto foi desenvolvido utilizando **Flutter** para a construção de uma interface moderna e responsiva, aliado ao **GetX** para gerenciamento de estado e navegação eficiente. A seguir, um resumo das principais dependências e suas versões utilizadas:
+
+- **cupertino_icons (v1.0.8):** Ícones padrão do iOS para dar uma identidade visual mais próxima dos dispositivos Apple.
+- **get (v4.6.6):** Gerenciamento de estado, injeção de dependências e navegação.
+- **animate_do (v4.0.1):** Animações simples e eficazes para enriquecer a experiência do usuário.
+- **flutter_native_splash (v2.4.4):** Criação de splash screens nativas para um carregamento inicial mais agradável.
+- **qr_flutter (v4.1.0):** Geração e exibição de QR Codes.
+- **intl (v0.20.2):** Suporte para internacionalização e formatação de datas e números.
+- **connectivity_plus (v6.1.3):** Monitoramento da conectividade do dispositivo.
+- **flutter_shake_animated (v0.0.5):** Efeitos visuais para feedbacks de erro, como em formulários de login.
+- **shared_preferences (v2.5.2):** Armazenamento local de informações simples.
+- **dotted_border (v2.1.0):** Criação de bordas pontilhadas para componentes visuais.
+- **sks_ticket_view (v1.0.0):** Visualização customizada de tickets e comprovantes.
+- **pdf (v3.11.3) e printing (v5.14.2):** Geração e impressão de documentos.
+- **time_picker_sheet:** Dependência obtida via Git para a seleção de horários, facilitando a escolha do tempo de expiração do QR Code.
 
 ---
 
 ## Estrutura do Projeto
 
-A estrutura do projeto está organizada de forma modular para facilitar a manutenção e escalabilidade:
+A organização do projeto é modular, facilitando a manutenção e a escalabilidade. Veja abaixo uma visão geral da estrutura do diretório:
 
 ```
 lib/
@@ -109,85 +109,35 @@ lib/
 
 ---
 
-## Pubspec.yaml
-
-O arquivo `pubspec.yaml` contém as dependências essenciais para o funcionamento do projeto. Confira o trecho abaixo:
-
-```yaml
-name: ta_na_conta
-description: "A new Flutter project."
-
-publish_to: 'none' # Remova esta linha se desejar publicar no pub.dev
-
-version: 1.0.0+1
-
-environment:
-  sdk: ^3.6.1
-
-dependencies:
-  flutter:
-    sdk: flutter
-
-  cupertino_icons: ^1.0.8
-  get: ^4.6.6
-  animate_do: ^4.0.1
-  flutter_native_splash: ^2.4.4
-  qr_flutter: ^4.1.0
-  intl: ^0.20.2
-  connectivity_plus: ^6.1.3
-  flutter_shake_animated: ^0.0.5
-  shared_preferences: ^2.5.2
-  dotted_border: ^2.1.0
-  sks_ticket_view: ^1.0.0
-  pdf: ^3.11.3
-  printing: ^5.14.2
-  
-  time_picker_sheet:
-    git:
-      url: https://github.com/MikaelDDavidd/time-picker-sheet
-      ref: master
-
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-
-  flutter_lints: ^5.0.0
-
-flutter:
-  uses-material-design: true
-
-  assets:
-    - assets/
-```
-
----
-
 ## Instalação e Execução
 
 ### Pré-requisitos
-- Flutter instalado e configurado na máquina.
-- Ambiente configurado para desenvolvimento Android e/ou iOS.
 
-### Passos para Executar o Projeto
+- Flutter instalado e devidamente configurado.
+- Ambiente preparado para desenvolvimento Android e/ou iOS.
+
+### Passos para Execução
 
 1. **Clone o Repositório:**
-   ```bash
-   git clone <URL_DO_REPOSITÓRIO>
-   cd ta_na_conta
-   ```
+   - Utilize o comando:
+     ```
+     git clone <URL_DO_REPOSITÓRIO>
+     cd ta_na_conta
+     ```
 
 2. **Instale as Dependências:**
-   ```bash
-   flutter pub get
-   ```
+   - Execute:
+     ```
+     flutter pub get
+     ```
 
-3. **Execute o Projeto:**
+3. **Rode o Projeto:**
    - Para **Android**:
-     ```bash
+     ```
      flutter run
      ```
    - Para **iOS**:
-     ```bash
+     ```
      flutter run --flavor ios
      ```
 
@@ -207,19 +157,19 @@ flutter:
 
 ## Contribuição
 
-Contribuições são bem-vindas! Siga os passos abaixo para colaborar:
+Contribuições são bem-vindas! Para colaborar:
 
 1. Faça um fork do repositório.
-2. Crie uma branch para a sua feature:
-   ```bash
+2. Crie uma branch para sua feature:
+   ```
    git checkout -b minha-feature
    ```
 3. Realize as alterações e efetue um commit:
-   ```bash
+   ```
    git commit -m 'Adiciona nova feature'
    ```
 4. Envie sua branch para o repositório remoto:
-   ```bash
+   ```
    git push origin minha-feature
    ```
 5. Abra um Pull Request.
@@ -232,6 +182,6 @@ Este projeto está licenciado sob a [MIT License](LICENSE).
 
 ---
 
-### Contato
+## Contato
 
 Caso tenha dúvidas ou sugestões, sinta-se à vontade para abrir uma _issue_ ou entrar em contato.
