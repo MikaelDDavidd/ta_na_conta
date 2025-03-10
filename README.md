@@ -152,7 +152,7 @@ lib/
 
 ### iOS
 <!-- Adicione aqui os screenshots do app rodando em iOS -->
-![iOS Screenshot](./screenshots/ios.png)
+![iOS Screenshot]
 <p align="center">
   <img src="./screenshots/ios-login.png" alt="Tela de Login" width="150" style="margin-right: 10px;">
   <img src="./screenshots/ios-extrato.png" alt="Tela de Extrato" width="150" style="margin-right: 10px;">
