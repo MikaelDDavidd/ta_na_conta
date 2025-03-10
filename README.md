@@ -148,11 +148,11 @@ lib/
 ### Android
 <!-- Adicione aqui os screenshots do app rodando em Android -->
 <p align="center">
-  <img src="./screenshots/andorid-login.png" alt="Tela de Login" width="150" style="margin-right: 10px;">
-  <img src="./screenshots/andorid-extrato.png" alt="Tela de Extrato" width="150" style="margin-right: 10px;">
-  <img src="./screenshots/andorid-makepix.png" alt="Tela de Criação do Pix" width="150" style="margin-right: 10px;">
-  <img src="./screenshots/andorid-qrcode.png" alt="QR Code" width="150" style="margin-right: 10px;">
-  <img src="./screenshots/andorid-comprovante.png" alt="Comprovante" width="150">
+  <img src="./screenshots/android-login.png" alt="Tela de Login" width="150" style="margin-right: 10px;">
+  <img src="./screenshots/android-extrato.png" alt="Tela de Extrato" width="150" style="margin-right: 10px;">
+  <img src="./screenshots/android-makepix.png" alt="Tela de Criação do Pix" width="150" style="margin-right: 10px;">
+  <img src="./screenshots/android-qrcode.png" alt="QR Code" width="150" style="margin-right: 10px;">
+  <img src="./screenshots/android-comprovante.png" alt="Comprovante" width="150">
 </p>
 
 
