@@ -169,26 +169,6 @@ lib/
 
 ---
 
-## Contribuição
-
-Contribuições são bem-vindas! Para colaborar:
-
-1. Faça um fork do repositório.
-2. Crie uma branch para sua feature:
-   ```
-   git checkout -b minha-feature
-   ```
-3. Realize as alterações e efetue um commit:
-   ```
-   git commit -m 'Adiciona nova feature'
-   ```
-4. Envie sua branch para o repositório remoto:
-   ```
-   git push origin minha-feature
-   ```
-5. Abra um Pull Request.
-
----
 
 ## Licença
 
