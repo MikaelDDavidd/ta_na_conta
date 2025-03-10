@@ -148,18 +148,19 @@ lib/
 ### Android
 <!-- Adicione aqui os screenshots do app rodando em Android -->
 ![Android Screenshot](./screenshots/android.png)
-<p align="center">
-  <img src="https://raw.githubusercontent.com/MikaelDDavidd/ta_na_conta/main/screenshots/ios-login.png" alt="Tela de Login" width="150" style="margin-right: 10px;">
-  <img src="https://raw.githubusercontent.com/MikaelDDavidd/ta_na_conta/main/screenshots/ios-extrato.png" alt="Tela de Extrato" width="150" style="margin-right: 10px;">
-  <img src="https://raw.githubusercontent.com/MikaelDDavidd/ta_na_conta/main/screenshots/ios-makepix.png" alt="Tela de Criação do Pix" width="150" style="margin-right: 10px;">
-  <img src="https://raw.githubusercontent.com/MikaelDDavidd/ta_na_conta/main/screenshots/ios-qrcode.png" alt="QR Code" width="150" style="margin-right: 10px;">
-  <img src="https://raw.githubusercontent.com/MikaelDDavidd/ta_na_conta/main/screenshots/ios-comprovante.png" alt="Comprovante" width="150">
-</p>
 
 
 ### iOS
 <!-- Adicione aqui os screenshots do app rodando em iOS -->
 ![iOS Screenshot](./screenshots/ios.png)
+<p align="center">
+  <img src="./screenshots/ios-login.png" alt="Tela de Login" width="150" style="margin-right: 10px;">
+  <img src="./screenshots/ios-extrato.png" alt="Tela de Extrato" width="150" style="margin-right: 10px;">
+  <img src="./screenshots/ios-makepix.png" alt="Tela de Criação do Pix" width="150" style="margin-right: 10px;">
+  <img src="./screenshots/ios-qrcode.png" alt="QR Code" width="150" style="margin-right: 10px;">
+  <img src="./screenshots/ios-comprovante.png" alt="Comprovante" width="150">
+</p>
+
 
 ---
 
